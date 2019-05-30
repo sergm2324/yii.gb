@@ -38,8 +38,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Список пользователей', 'url' => ['/users']],
-            ['label' => 'Список задач', 'url' => ['/task']],
+            ['label' => 'Список пользователей (админка)', 'url' => ['/users']],
+            ['label' => 'Список задач (админка)', 'url' => ['/tasks']],
             ['label' => 'Карточка', 'url' => ['/task/card']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
