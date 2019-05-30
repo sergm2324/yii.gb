@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\tables\Tasks;
 use app\models\Task;
 use yii\web\Controller;
 
@@ -13,7 +14,12 @@ class TaskController extends Controller
     public function actionIndex()
     {
 
-        return $this->render('index');
+        $tasks= new Tasks();
+        $result = $tasks->getTasksAll();
+
+        return $this->render('index', [
+            'result' => $result
+        ]);
 
     }
 
