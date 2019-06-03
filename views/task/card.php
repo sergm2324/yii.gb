@@ -1,12 +1,23 @@
-<h2>Карточка задачи</h2>
+<?php
 
-<p><?=$model->name;?></p>
-<p><?=$model->discribe;?></p>
-<p><?=$model->autor;?></p>
-<p><?=$model->responsible;?></p>
-<p><?=$model->datedo;?></p>
+use app\models\tables\Tasks;
+use yii\helpers\Html;
+use yii\web\View;
 
-<h3>Ошибки валидации:</h3>
-<? foreach ($myerrors as $item):?>
-<p><?=$item[0];?></p>
-<? endforeach; ?>
+/* @var $this yii\web\View */
+/* @var $model app\models\tables\Tasks */
+
+$this->title = 'Update Tasks: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Список задач', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name];
+$this->params['breadcrumbs'][] = 'Карточка задачи';
+?>
+<div class="tasks-update">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+
+</div>

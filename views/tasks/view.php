@@ -47,7 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label'=>'responsible',
                 'value'=>$model->userres->username
-            ]
+            ],
+            'created_at',
+            'updated_at'
         ],
     ]) ?>
 

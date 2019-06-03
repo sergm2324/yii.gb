@@ -46,7 +46,7 @@ class TasksFilter extends Tasks
 
         $dataProvider = new ActiveDataProvider([
             'pagination'=>[
-                'pageSize'=>3
+                'pageSize'=>4
             ],
             'query' => $query,
         ]);
@@ -69,7 +69,9 @@ class TasksFilter extends Tasks
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'created_at', $this->created_at])
+            ->andFilterWhere(['like', 'updated_at', $this->updated_at]);
 
         return $dataProvider;
     }

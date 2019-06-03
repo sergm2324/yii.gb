@@ -2,8 +2,15 @@
 
 namespace app\models\tables;
 
+use app\components\Bootstrap;
+use app\models\events\EventResponsibleId;
+use app\models\forms\SubscribeBehavior;
 use app\models\tables\Users;
 use Yii;
+use yii\behaviors\AttributeBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "tasks".
@@ -15,7 +22,8 @@ use Yii;
  * @property int $responsible_id
  * @property string $deadline
  * @property int $status_id
- *
+ * @property int $created_at
+ * @property int $updated_at
  * @property $status
  *
  * @property $usercr
@@ -24,6 +32,22 @@ use Yii;
  */
 class Tasks extends \yii\db\ActiveRecord
 {
+    public function behaviors(){
+
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+
+        ];
+    }
+
+
     /**
      * {@inheritdoc}
      */
