@@ -13,6 +13,7 @@ use yii\helpers\Url;
             <div class="task-preview-content"><?=$model['description']?></div>
             <div class="task-preview-user"><?=$model->usercr->username?></div>
             <div class="task-preview-user"><?=$model->userres->username?></div>
+            <div class="task-preview-user"><?=$model['deadline']?></div>
             <div class="task-preview-user"><?=$model->status->name?></div>
         </div>
         <?php if ($linked): ?>

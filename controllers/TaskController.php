@@ -6,8 +6,12 @@ namespace app\controllers;
 
 use app\models\filters\TasksFilter;
 use app\models\tables\Tasks;
+use app\models\tables\TaskStatuses;
+use app\models\tables\Users;
 use app\models\Task;
 use Yii;
+use yii\filters\PageCache;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -17,14 +21,15 @@ class TaskController extends Controller
     public function actionIndex()
     {
 
+        $month = Yii::$app->request->post('TasksFilter')['deadline'];
         $searchModel = new TasksFilter();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $month);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'month' => $month,
         ]);
-
     }
 
 
@@ -38,6 +43,19 @@ class TaskController extends Controller
     public function actionCard($id)
     {
         $model = $this->findModel($id);
+        $status = TaskStatuses::getStatusesList();
+        $responsible = Users::getUsersList();
+
+        return $this->render('card', [
+            'model' => $model,
+            'status'=>$status,
+            'responsible'=>$responsible,
+        ]);
+    }
+
+    public function actionSave($id)
+    {
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -47,6 +65,8 @@ class TaskController extends Controller
             'model' => $model,
         ]);
     }
+
+
 
     /**
      * Finds the Tasks model based on its primary key value.

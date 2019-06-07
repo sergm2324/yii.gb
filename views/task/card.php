@@ -1,7 +1,9 @@
 <?php
 
 use app\models\tables\Tasks;
+use \yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use \yii\helpers\Url;
 use yii\web\View;
 
 /* @var $this yii\web\View */
@@ -18,6 +20,8 @@ $this->params['breadcrumbs'][] = 'Карточка задачи';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'status'=>$status,
+        'responsible'=>$responsible,
     ]) ?>
 
 </div>
