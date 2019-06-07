@@ -3,6 +3,9 @@
 namespace app\models\tables;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "task_statuses".
@@ -14,6 +17,21 @@ use Yii;
  */
 class TaskStatuses extends \yii\db\ActiveRecord
 {
+
+    public function behaviors(){
+
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ]
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -3,6 +3,9 @@
 namespace app\models\tables;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "users".
@@ -10,6 +13,9 @@ use Yii;
  * @property int $id
  * @property string $username Имя пользователя
  * @property string $password
+ * @property string $email
+ * @property int $created_at
+ * @property int $updated_at
  * @property string $authKey
  * @property string $accessToken
  *
@@ -19,6 +25,21 @@ use Yii;
 class Users extends \yii\db\ActiveRecord
 {
 //    const SCENARIO_AUTH = 'auth';
+
+    public function behaviors(){
+
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ]
+        ];
+    }
+
 
     /**
      * {@inheritdoc}
@@ -35,6 +56,7 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             [['username'], 'required'],
+            [['email'], 'email'],
             [['username'], 'string', 'max' => 50],
             [['password', 'authKey', 'accessToken'], 'string', 'max' => 255],
         ];
@@ -49,6 +71,9 @@ class Users extends \yii\db\ActiveRecord
             'id' => 'ID',
             'username' => 'Username',
             'password' => 'Password',
+            'email' => 'Email',
+            'created_at' => 'Created_at',
+            'updated_at' => 'Updated_at',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
         ];

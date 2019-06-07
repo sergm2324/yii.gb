@@ -18,6 +18,7 @@ class UsersFilter extends Users
     {
         return [
             [['id'], 'integer'],
+            [['email'], 'email'],
             [['username', 'password', 'authKey', 'accessToken'], 'safe'],
         ];
     }
@@ -45,6 +46,9 @@ class UsersFilter extends Users
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
+            'pagination'=>[
+                'pageSize'=>3
+            ],
             'query' => $query,
         ]);
 
@@ -63,6 +67,9 @@ class UsersFilter extends Users
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'created_at', $this->created_at])
+            ->andFilterWhere(['like', 'updated_at', $this->updated_at])
             ->andFilterWhere(['like', 'authKey', $this->authKey])
             ->andFilterWhere(['like', 'accessToken', $this->accessToken]);
 

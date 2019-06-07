@@ -20,10 +20,12 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'username') ?>
 
     <?= $form->field($model, 'password') ?>
+    <?= $form->field($model, 'created_at') ?>
+    <?= $form->field($model, 'updated_at') ?>
 
-    <?= $form->field($model, 'authKey') ?>
+<!--    --><?//= //$form->field($model, 'authKey') ?>
 
-    <?= $form->field($model, 'accessToken') ?>
+<!--    --><?//= //$form->field($model, 'accessToken') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

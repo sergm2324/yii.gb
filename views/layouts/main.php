@@ -22,6 +22,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <link rel="stylesheet" href="/css/task.css">
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -40,7 +41,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Список пользователей (админка)', 'url' => ['/users']],
             ['label' => 'Список задач (админка)', 'url' => ['/tasks']],
-            ['label' => 'Карточка', 'url' => ['/task/card']],
+            ['label' => 'Карточки', 'url' => ['/task']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
