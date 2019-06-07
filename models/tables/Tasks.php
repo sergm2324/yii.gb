@@ -2,7 +2,7 @@
 
 namespace app\models\tables;
 
-use app\models\User;
+use app\models\tables\Users;
 use Yii;
 
 /**
@@ -18,7 +18,9 @@ use Yii;
  *
  * @property $status
  *
- * @property $user
+ * @property $usercr
+ *
+ * @property $userres
  */
 class Tasks extends \yii\db\ActiveRecord
 {
@@ -65,17 +67,16 @@ class Tasks extends \yii\db\ActiveRecord
         return $this->hasOne(TaskStatuses::class, ['id' => 'status_id']);
     }
 
+    public function getUsercr()
+    {
+        return $this->hasOne(Users::class, ['id' => 'creator_id']);
+    }
 
+    public function getUserres()
+    {
+        return $this->hasOne(Users::class, ['id' => 'responsible_id']);
+    }
 
-//    public function getUser()
-//    {
-//        return $this->hasOne(User::class, ['id' => 'creator_id']);
-//    }
-
-//    public function getUserResponsible()
-//    {
-//        return $this->hasOne(User::class, ['id' => 'responsible_id']);
-//    }
 
     public function getTasksAll(){
         $db = \Yii::$app->db;
