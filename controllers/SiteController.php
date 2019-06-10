@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\filters\TasksFilter;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\PageCache;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -19,6 +20,11 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+            'cache'=> [
+                'class' => PageCache::class,
+                'only' =>['about']
+            ],
+
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
@@ -126,6 +132,9 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+
+
+
         return $this->render('about');
     }
 }

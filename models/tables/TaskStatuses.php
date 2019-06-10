@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "task_statuses".
@@ -68,4 +69,14 @@ class TaskStatuses extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Tasks::class, ['status_id' => 'id']);
     }
+
+    public static function getStatusesList(){
+        $statuses = static::find()
+            ->select(['id','name'])
+            ->asArray()
+            ->all();
+        $statusAr = ArrayHelper::map($statuses, 'id','name');
+        return $statusAr;
+    }
+
 }
