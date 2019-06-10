@@ -9,7 +9,7 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model app\models\tables\Tasks */
 
-$this->title = 'Update Tasks: ' . $model->name;
+$this->title = 'Редактирование задачи: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Список задач', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name];
 $this->params['breadcrumbs'][] = 'Карточка задачи';
@@ -22,6 +22,10 @@ $this->params['breadcrumbs'][] = 'Карточка задачи';
         'model' => $model,
         'status'=>$status,
         'responsible'=>$responsible,
+        'dataProviderComments'=>$dataProviderComments,
+        'searchModelComments'=>$searchModelComments,
+        'dataProviderFiles'=>$dataProviderFiles,
+        'searchModelFiles'=>$searchModelFiles,
     ]) ?>
 
 </div>

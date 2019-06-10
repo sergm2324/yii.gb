@@ -77,12 +77,12 @@ class Tasks extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'creator_id' => 'Creator ID',
-            'responsible_id' => 'Responsible ID',
-            'deadline' => 'Deadline',
-            'status_id' => 'Status ID',
+            'name' => \Yii::t('app','Name'),
+            'description' => \Yii::t('app','Description'),
+            'creator_id' => \Yii::t('app','Creator ID'),
+            'responsible_id' => \Yii::t('app','Responsible ID'),
+            'deadline' => \Yii::t('app','Deadline'),
+            'status_id' => \Yii::t('app','Status ID'),
         ];
     }
 
@@ -108,6 +108,5 @@ class Tasks extends \yii\db\ActiveRecord
             ->queryAll();
         return $tasks;
     }
-
 
 }
