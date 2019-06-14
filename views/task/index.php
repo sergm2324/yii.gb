@@ -8,6 +8,8 @@ use yii\grid\GridView;
 use yii\web\View;
 use yii\bootstrap\ActiveForm;
 
+\Yii::$app->language =$_SESSION['language'];
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\filters\TasksFilter */
