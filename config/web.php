@@ -11,6 +11,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@img' => "@app/web/img",
     ],
     'components' => [
         'i18n' => [
@@ -55,14 +56,18 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing'=>false,
             'rules' => [
+                "task-list"=>"task/index",
+                "task/card/<id>"=>"task/card",
+                "task/card/<id>/save"=>"task/save",
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
