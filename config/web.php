@@ -12,8 +12,36 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@img' => "@app/web/img",
+        '@mdm/admin' => 'path/to/your/extracted',
     ],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'userClassName' => 'app\models\tables\Users', // fully qualified class name of your User model
+                    // Usually you don't need to specify it explicitly, since the module will detect it automatically
+                    'idField' => 'id',        // id field of your User model that corresponds to Yii::$app->user->id
+                    'usernameField' => 'username', // username field of your User model
+                    'searchClass' => 'app\models\filters\UsersFilter'    // fully qualified class name of your User model for searching
+                ]
+            ],
+            'layout' => 'left-menu', // defaults to null, using the application's layout without the menu
+            // other avaliable values are 'right-menu' and 'top-menu'
+            'mainLayout' => '@app/views/layouts/main.php',
+            'menus' => [
+                'assignment' => [
+                    'label' => 'Grant Access' // change label
+                ],
+                'route' => null, // disable menu
+            ],
+        ],
+        ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager'
+        ],
         'i18n' => [
             'translations' => [
                 'app*' => [
@@ -55,18 +83,31 @@ $config = [
                 ],
             ],
         ],
+        'as access' => [
+            'class' => 'mdm\admin\components\AccessControl',
+            'allowActions' => [
+                'site/*',
+                'admin/*',
+                'some-controller/some-action',
+                // The actions listed here will be allowed to everyone including guests.
+                // So, 'admin/*' should not appear here in the production, of course.
+                // But in the earlier stages of your development, you may probably want to
+                // add a lot of actions here until you finally completed setting up rbac,
+                // otherwise you may not even take a first step.
+            ]
+        ],
         'db' => $db,
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'enableStrictParsing'=>false,
-            'rules' => [
-                "task-list"=>"task/index",
-                "task/card/<id>"=>"task/card",
-                "task/card/<id>/save"=>"task/save",
-            ],
-        ],
+//        'urlManager' => [
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+//            'enableStrictParsing'=>false,
+//            'rules' => [
+//                "task-list"=>"task/index",
+//                "task/card/<id>"=>"task/card",
+//                "task/card/<id>/save"=>"task/save",
+//            ],
+//        ],
 
     ],
     'params' => $params,

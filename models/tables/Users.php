@@ -2,6 +2,7 @@
 
 namespace app\models\tables;
 
+use app\models\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -115,6 +116,26 @@ class Users extends \yii\db\ActiveRecord
             ->all();
         $userAr = ArrayHelper::map($users, 'id','username');
         return $userAr;
+    }
+
+    public static function findIdentity($id)
+    {
+        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+
+        $db = \Yii::$app->db;
+        $user = $db->createCommand("SELECT * FROM users WHERE id=:id LIMIT 1")
+            ->bindValue(':id', $id)->queryOne();
+
+        if($user){
+            $obj = new User();
+            $obj->id=$user['id'];
+            $obj->username=$user['username'];
+            $obj->password=$user['password'];
+            $obj->authKey=$user['authKey'];
+            $obj->accessToken=$user['accessToken'];
+            return $obj;
+        }
+        return null;
     }
 
 }

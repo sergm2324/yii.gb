@@ -24,3 +24,12 @@
     border: 1px solid dimgray;
     padding: 12px;
 }
+
+#preview_elements{
+    display: flex;
+    justify-content: flex-start;
+}
+.img-margin{
+    margin-right: 10px;
+    margin-bottom: 20px;
+}

@@ -104,7 +104,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect(Yii::$app->request->getReferrer());
     }
 
     /**
@@ -134,7 +134,13 @@ class SiteController extends Controller
     {
 
 
-
         return $this->render('about');
     }
+
+    public function actionLang ($lang)
+    {
+        Yii::$app->session->set('language',$lang);
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
 }
